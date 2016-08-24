@@ -18,6 +18,7 @@ var express = require('express'), // our framework!
         }
     }),
     app = express(), // initialize express
+    io = require('socket.io'),
     port = process.env.PORT||8888 // server port
 
 mongoose.connect('mongodb://localhost/app', ( error ) => {
@@ -48,6 +49,25 @@ app.post('*', bodyParser.json(), bodyParser.urlencoded({ extended:true }))
 require('./routes')(app) // do all the routing stuff in a separate file by passing a reference of the app!
 
 // start the server
-app.listen(port, () => {
+var server = app.listen(port, () => {
     console.log('Server Started on port:', port.toString().cyan)
 })
+
+// mounts socket.io into our server
+var socketServer = io(server);
+
+// socketServer emits a connection event (the event when somebody new goes to your site)
+socketServer.on('connection', (socket) => {
+    // here, socket is the object representing the actual connection on someone using your site.
+    // twitterStream.on('tweet', (tweetData) => {
+    //     socket.emit('incomingTweet', tweetData); // private socket connection
+    // });
+
+    socket.on('randomNumber', (data) => {
+        console.log('Data:', data);
+        var newNum = data * 100; // manipulating the random number we got from the client
+
+        socketServer.emit('newNumber', newNum); // public socket connection
+        // broadcasting a newNumber to (ALL) clients connected via socket
+    })
+});
