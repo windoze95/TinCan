@@ -1,3 +1,62 @@
 body {
     padding: 80px
 }
+
+/* Transition effects */
+
+.l-one-whole {
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+}
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.slide.ng-enter, .slide.ng-leave {
+    transition: all 1s ease;
+}
+.slide.ng-enter {
+    transform: translate(100%, 0);
+}
+.slide.ng-enter-active {
+    transform: translate(0, 0);
+}
+.slide.ng-leave {
+    transform: translate(0, 0);
+}
+.slide.ng-leave-active {
+    transform: translate(-100%, 0);
+}
+
+/* Put your css in here */
+
+*, *:after, *:before {
+    @include prefix("box-sizing", "border-box", webkit moz);
+}
+html {
+    font-size: 62.5%;
+    min-height: 100%;
+    position: relative;
+    body {
+        font-size: 140%;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0 0;
+        margin-bottom: 60px;
+    }
+}
+.container {
+    max-width: 430px;
+    margin: 0 auto;
+    position: relative;
+    display: block;
+    float: none;
+    overflow: hidden;
+}
+.l-one-whole {
+    width: 100%;
+}
