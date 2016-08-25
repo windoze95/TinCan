@@ -25,8 +25,8 @@ var HTTP = require('http'),
     HTTP_app = express(), // initialize express
     io = require('socket.io'),
     options = {
-        key: fs.readFileSync( './tincan.chat.key', 'utf8' ),
-        cert: fs.readFileSync( './tincan.chat.crt', 'utf8' )
+        key: fs.readFileSync( './tincan.chat.pem', 'utf8' ),
+        cert: fs.readFileSync( './tincan.chat.pem', 'utf8' )
     };
 
 mongoose.connect('mongodb://localhost/tincan', (error) => {
