@@ -50,7 +50,7 @@ app.use(sessions) // mounting HTTPs session cookies
 app.all('*', ( req, res, next ) => {
     console.log(req.protocol, req.headers['x-forwarded-proto']);
     // process.exit(0);
-    if( req.protocol === 'http' || !req.headers['x-forwarded-proto'] ) {
+    if( req.protocol === 'http') {
         res.set('X-Forwarded-Proto','https');
         res.redirect('https://'+ req.headers.host + req.url);
     } else {
