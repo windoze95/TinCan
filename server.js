@@ -18,7 +18,7 @@ var express = require('express'), // our framework!
         }
     }),
     app = express(), // initialize express
-    io = require('socket.io'),
+    io = require('socket.io')
 
     app.settings.env = 'development'
     var Config = require('./config')
