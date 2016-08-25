@@ -24,8 +24,10 @@ var HTTP = require('http'),
     HTTPS_app = express(), // initialize express
     HTTP_app = express(), // initialize express
     io = require('socket.io'),
-    privateKey = fs.readFileSync( '/root/tincan.chat.key', 'utf8' ),
-    certificate = fs.readFileSync( '/root/tincan.chat.crt', 'utf8' );
+    options = {
+        key: fs.readFileSync( './tincan.chat.key', 'utf8' ),
+        cert: fs.readFileSync( './tincan.chat.crt', 'utf8' );
+    };
 
 mongoose.connect('mongodb://localhost/tincan', (error) => {
     if (error) {
@@ -77,10 +79,12 @@ HTTP.createServer( HTTP_app )
      .listen( 80 );
 
 // HTTPS server, the real app listens on this.
-HTTPS.createServer({ // https://nodejs.org/api/https.html
-     key: privateKey,
-     cert: certificate
-}, HTTPS_app).listen( 443 );
+HTTPS.createServer(options, HTTPS_app).listen( 443 );
+
+// { // https://nodejs.org/api/https.html
+//      key: privateKey,
+//      cert: certificate
+// }
 
 // var server = app.listen(port, () => {
 //     console.log('Server started on port:', port.toString().cyan)
