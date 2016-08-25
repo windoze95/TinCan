@@ -21,8 +21,13 @@ var HTTP = require('http'),
             secure: false // when true, cookie will only be sent over SSL;
         }
     }),
-    HTTPS_app = express(), // initialize express
-    HTTP_app = express(), // initialize express
+    app = express(),
+    ports = { // server ports
+        http:  process.env.PORT || 80,
+        https: process.env.PORT_SSL || 443
+    },
+    // HTTPS_app = express(), // initialize express
+    // HTTP_app = express(), // initialize express
     io = require('socket.io'),
     options = {
         key: fs.readFileSync( './tincan.chat.key', 'utf8' ),
@@ -39,56 +44,40 @@ mongoose.connect('mongodb://localhost/tincan', (error) => {
 })
 
 // server setup
-HTTPS_app.use(logger('dev')) // mounting dev logging
-HTTPS_app.use(sessions) // mounting HTTPs session cookies
+app.use(logger('dev')) // mounting dev logging
+// this middleware can redirect all traffic to HTTPs
+app.use(( req, res, next ) => {
+    if( req.protocol === 'http' || !req.headers['x-forwarded-proto'] ) {
+        res.set('X-Forwarded-Proto','https');
+        res.redirect('https://'+ req.headers.host + req.url);
+    } else {
+        next();
+    }
+});
+app.use(sessions) // mounting HTTPs session cookies
 
 // turn the public folder into a file server
-HTTPS_app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/public'))
 
 // enable server-side rendering
-HTTPS_app.set('view engine', 'html')
+app.set('view engine', 'html')
 
 // use EJS as a templating engine
-HTTPS_app.engine('html', ejs.renderFile)
+app.engine('html', ejs.renderFile)
 
 // mount the body-parsing middleware to parse payload strings into `body` object stored in `req.body`
-HTTPS_app.post('*', bodyParser.json(), bodyParser.urlencoded({
+app.post('*', bodyParser.json(), bodyParser.urlencoded({
     extended: true
 }))
 
-require('./routes')(HTTPS_app) // do all the routing stuff in a separate file by passing a reference of the app!
+require('./routes')(app) // do all the routing stuff in a separate file by passing a reference of the app!
 
-// start the server/https redirect
-HTTP_app.get('*', (req, res) => {
-     console.log('Querystring:', req.query);
-     res.send(req.query);
-});
-
-HTTPS_app.get('*', (req, res) => {
-     console.log('Querystring:', req.query);
-     res.send(req.query);
-});
-
-HTTPS_app.post('*', (req, res) => {
-     console.log('POST payload:', req.body);
-     res.send(req.body);
-});
-
-// HTTP server, just listens for connections and immediately redirects to HTTPs
-HTTP.createServer( HTTP_app )
-     .listen( 80 );
-
-// HTTPS server, the real app listens on this.
-HTTPS.createServer(options, HTTPS_app).listen( 443 );
-
-// { // https://nodejs.org/api/https.html
-//      key: privateKey,
-//      cert: certificate
-// }
+// create an HTTP server
+HTTP.createServer( app ).listen( ports.http );
+// also create an HTTPs server
+var server = HTTPS.createServer( httpsConfig, app).listen( ports.https );
 
 // var server = app.listen(port, () => {
-//     console.log('Server started on port:', port.toString().cyan)
-// })
 
 // mounts socket.io into our server
 // var socketServer = io(server);
