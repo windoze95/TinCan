@@ -1,6 +1,8 @@
 require('colors') // awesome colors in your console logs!
 
 var express = require('express'), // our framework!
+    Config = require('../conf'),
+    conf = new Config(), // access properties like such - conf.service.consumerKey
     bodyParser = require('body-parser'), // used for POST routes to obtain the POST payload as a property on `req`
     path = require('path'), // used to resolve paths across OSes
     logger = require('morgan'), // log the routes being accessed by the frontend
@@ -20,6 +22,8 @@ var express = require('express'), // our framework!
     app = express(), // initialize express
     io = require('socket.io'),
     port = process.env.PORT || 8888 // server port
+
+    app.settings.env = 'development'
 
 mongoose.connect('mongodb://localhost/app', (error) => {
     if (error) {
