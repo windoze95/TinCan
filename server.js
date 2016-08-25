@@ -18,12 +18,12 @@ var express = require('express'), // our framework!
         }
     }),
     app = express(), // initialize express
-    appEnv = 'development',
-    Config = require('./config'),
-    // conf = new Config, // access properties like such - conf.service.consumerKey
     io = require('socket.io'),
-    port = process.env.PORT || 8888 // server port
 
+    app.settings.env = 'development'
+    var Config = require('./config'),
+    port = process.env.PORT || 8888 // server port
+    // conf = new Config, // access properties like such - conf.service.consumerKey
 
 mongoose.connect('mongodb://localhost/app', (error) => {
     if (error) {
