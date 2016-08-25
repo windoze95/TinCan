@@ -75,7 +75,7 @@ require('./routes')(app) // do all the routing stuff in a separate file by passi
 // create an HTTP server
 HTTP.createServer( app ).listen( ports.http );
 // also create an HTTPs server
-var server = HTTPS.createServer( httpsConfig, app).listen( ports.https );
+var server = HTTPS.createServer( options, app).listen( ports.https );
 
 // var server = app.listen(port, () => {
 
