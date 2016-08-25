@@ -7,11 +7,11 @@ tinCanRouter.$inject = ['$stateProvider, $urlRouterProvider'];
 
 function tinCanRouter($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state('tangles', {
-            url         : '/',
-            templateUrl : 'list.html',
-            controller  : 'ListCtrl as lCtrl'
-        })
+        // .state('tangles', {
+        //     url         : '/',
+        //     templateUrl : 'list.html',
+        //     controller  : 'ListCtrl as lCtrl'
+        // })
         .state('listView', {
             url         : '/list',
             templateUrl : 'list.html',
