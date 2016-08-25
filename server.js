@@ -45,8 +45,9 @@ mongoose.connect('mongodb://localhost/tincan', (error) => {
 
 // server setup
 app.use(logger('dev')) // mounting dev logging
+app.use(sessions) // mounting HTTPs session cookies
 // this middleware can redirect all traffic to HTTPs
-app.use(( req, res, next ) => {
+app.all('*', ( req, res, next ) => {
     if( req.protocol === 'http' || !req.headers['x-forwarded-proto'] ) {
         res.set('X-Forwarded-Proto','https');
         res.redirect('https://'+ req.headers.host + req.url);
@@ -54,7 +55,6 @@ app.use(( req, res, next ) => {
         next();
     }
 });
-app.use(sessions) // mounting HTTPs session cookies
 
 // turn the public folder into a file server
 app.use(express.static(__dirname + '/public'))
