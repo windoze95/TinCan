@@ -1,6 +1,7 @@
 'use strict'
 
 var Auth = require('./auth');
+var NewTangle = require('./create')
 
 module.exports = function(app) {
     // SITE ROOT
@@ -18,4 +19,6 @@ module.exports = function(app) {
     app.get('/tangles', (req, res) => { // renders the dashboard
         res.render('tangles.html', req.session)
     });
+
+    app.post('/tangles/create', NewTangle.create);
 }

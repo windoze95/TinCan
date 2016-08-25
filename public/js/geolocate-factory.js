@@ -37,7 +37,7 @@ angular.module('TinCan')
                         defer.resolve(position.currentCoords = {
                             lat:    position.coords.latitude,
                             lon:    position.coords.longitude,
-                            time:   position.timestamp
+                            // time:   position.timestamp
                         });
                     },
                     function(err) {

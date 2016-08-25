@@ -1,0 +1,7 @@
+<form ng-submit="ntCtrl.submitTangle()">
+<!-- ng-controller="NewTangleController as ntCtrl" -->
+    <input class="form-control" type="text" ng-model="form.newTangle.title" placeholder="Lets name it!"/>
+    <button type="submit" class="btn btn-default">Lets get tangled!</button>
+
+    <p class="alert alert-info">{{ form.newTangleId }}</p>
+</form>
