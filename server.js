@@ -50,7 +50,7 @@ app.post('*', bodyParser.json(), bodyParser.urlencoded({
 }))
 
 require('./routes')(app) // do all the routing stuff in a separate file by passing a reference of the app!
-console.log(process.env.PORT);
+
 // start the server
 var server = app.listen(port, () => {
     console.log('Server Started on port:', port.toString().cyan)
