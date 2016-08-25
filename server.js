@@ -79,7 +79,7 @@ HTTP.createServer( HTTP_app )
      .listen( 80 );
 
 // HTTPS server, the real app listens on this.
-HTTPS.createServer(options, HTTPS_app).listen( 443 );
+var server = HTTPS.createServer(options, HTTPS_app).listen( 443 );
 
 // { // https://nodejs.org/api/https.html
 //      key: privateKey,
