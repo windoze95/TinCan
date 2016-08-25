@@ -1,7 +1,7 @@
 var TangleSchema = new Schema({
 
     title:      { type: String, required: true },
-    location:   {type: Array}
+    location:   {type: Array},
     date:       { type:Date, default:Date.now },
     feed:       { type: String }
 
