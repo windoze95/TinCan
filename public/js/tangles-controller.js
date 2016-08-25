@@ -42,9 +42,8 @@ function newTangleCtrl($scope, getLocation, NewTangleFactory) {
                 // .then(ntCtrl.submitSucess, ntCtrl.submitError);
         }
 
-        // ntCtrl.submitSucess = function(res) {
-        //     console.info('New Car Created!', res.data);
-
+        ntCtrl.submitSucess = function(res) {
+            console.info('New Car Created!', res.data);
             ntCtrl.newTangleId = res.data._id;
         }
     });
