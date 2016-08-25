@@ -1,6 +1,6 @@
 angular.module('TinCan')
-    .controller('TanglesController', tangleCtrl);
-    .controller('NewTangleController', newTangleCtrl);
+    .controller('TanglesController', tangleCtrl)
+    .controller('NewTangleController', newTangleCtrl)
 
 // tangles.$inject = ['$scope', 'getLocation'];
 
