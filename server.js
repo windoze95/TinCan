@@ -21,6 +21,7 @@ var HTTP = require('http'),
             secure: false // when true, cookie will only be sent over SSL;
         }
     }),
+    app = express(),    
     HTTPS_app = express(), // initialize express
     HTTP_app = express(), // initialize express
     io = require('socket.io'),
@@ -36,55 +37,55 @@ mongoose.connect('mongodb://localhost/app', (error) => {
     }
 })
 
-// server setup
-app.use(logger('dev')) // mounting dev logging
-app.use(sessions) // mounting HTTPs session cookies
+// // server setup
+// app.use(logger('dev')) // mounting dev logging
+// app.use(sessions) // mounting HTTPs session cookies
+//
+// // turn the public folder into a file server
+// app.use(express.static(__dirname + '/public'))
+//
+// // enable server-side rendering
+// app.set('view engine', 'html')
+//
+// // use EJS as a templating engine
+// app.engine('html', ejs.renderFile)
+//
+// // mount the body-parsing middleware to parse payload strings into `body` object stored in `req.body`
+// app.post('*', bodyParser.json(), bodyParser.urlencoded({
+//     extended: true
+// }))
+//
+// require('./routes')(app) // do all the routing stuff in a separate file by passing a reference of the app!
+//
+// // start the server/https redirect
+// HTTP_app.get('*', (req, res) => {
+//      console.log('Querystring:', req.query);
+//      res.send(req.query);
+// });
+//
+// HTTPS_app.get('*', (req, res) => {
+//      console.log('Querystring:', req.query);
+//      res.send(req.query);
+// });
+//
+// HTTPS_app.post('*', (req, res) => {
+//      console.log('POST payload:', req.body);
+//      res.send(req.body);
+// });
+//
+// // HTTP server, just listens for connections and immediately redirects to HTTPs
+// HTTP.createServer( HTTP_app )
+//      .listen( 80 );
+//
+// // HTTPS server, the real app listens on this.
+// HTTPS.createServer({ // https://nodejs.org/api/https.html
+//      key: privateKey,
+//      cert: certificate
+// }, HTTPS_app).listen( 443 );
 
-// turn the public folder into a file server
-app.use(express.static(__dirname + '/public'))
-
-// enable server-side rendering
-app.set('view engine', 'html')
-
-// use EJS as a templating engine
-app.engine('html', ejs.renderFile)
-
-// mount the body-parsing middleware to parse payload strings into `body` object stored in `req.body`
-app.post('*', bodyParser.json(), bodyParser.urlencoded({
-    extended: true
-}))
-
-require('./routes')(app) // do all the routing stuff in a separate file by passing a reference of the app!
-
-// start the server/https redirect
-HTTP_app.get('*', (req, res) => {
-     console.log('Querystring:', req.query);
-     res.send(req.query);
-});
-
-HTTPS_app.get('*', (req, res) => {
-     console.log('Querystring:', req.query);
-     res.send(req.query);
-});
-
-HTTPS_app.post('*', (req, res) => {
-     console.log('POST payload:', req.body);
-     res.send(req.body);
-});
-
-// HTTP server, just listens for connections and immediately redirects to HTTPs
-HTTP.createServer( HTTP_app )
-     .listen( 80 );
-
-// HTTPS server, the real app listens on this.
-HTTPS.createServer({ // https://nodejs.org/api/https.html
-     key: privateKey,
-     cert: certificate
-}, HTTPS_app).listen( 443 );
-
-// var server = app.listen(port, () => {
-//     console.log('Server started on port:', port.toString().cyan)
-// })
+var server = app.listen(port, () => {
+    console.log('Server started on port:', port.toString().cyan)
+})
 
 // mounts socket.io into our server
 var socketServer = io(server);
