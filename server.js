@@ -1,7 +1,10 @@
 require('colors') // awesome colors in your console logs!
 
-var express = require('express'), // our framework!
-    config = require('./config'),
+var HTTP = require('http'),
+    HTTPS = require('https'),
+    fs = require('fs'),
+    express = require('express'), // our framework!
+    // config = require('./config'),
     bodyParser = require('body-parser'), // used for POST routes to obtain the POST payload as a property on `req`
     path = require('path'), // used to resolve paths across OSes
     logger = require('morgan'), // log the routes being accessed by the frontend
@@ -18,9 +21,11 @@ var express = require('express'), // our framework!
             secure: false // when true, cookie will only be sent over SSL;
         }
     }),
-    app = express(), // initialize express
+    HTTPS_app = express(), // initialize express
+    HTTP_app = express(), // initialize express
     io = require('socket.io'),
-    port = process.env.PORT || 8888 // server port
+    privateKey = fs.readFileSync( 'privatekey.pem' ),
+    certificate = fs.readFileSync( 'certificate.pem' );
 
 mongoose.connect('mongodb://localhost/app', (error) => {
     if (error) {
@@ -51,10 +56,35 @@ app.post('*', bodyParser.json(), bodyParser.urlencoded({
 
 require('./routes')(app) // do all the routing stuff in a separate file by passing a reference of the app!
 
-// start the server
-var server = app.listen(port, () => {
-    console.log('Server Started on port:', port.toString().cyan)
-})
+// start the server/https redirect
+HTTP_app.get('*', (req, res) => {
+     console.log('Querystring:', req.query);
+     res.send(req.query);
+});
+
+HTTPS_app.get('*', (req, res) => {
+     console.log('Querystring:', req.query);
+     res.send(req.query);
+});
+
+HTTPS_app.post('*', (req, res) => {
+     console.log('POST payload:', req.body);
+     res.send(req.body);
+});
+
+// HTTP server, just listens for connections and immediately redirects to HTTPs
+HTTP.createServer( HTTP_app )
+     .listen( 80 );
+
+// HTTPS server, the real app listens on this.
+HTTPS.createServer({ // https://nodejs.org/api/https.html
+     key: privateKey,
+     cert: certificate
+}, HTTPS_app).listen( 443 );
+
+// var server = app.listen(port, () => {
+//     console.log('Server started on port:', port.toString().cyan)
+// })
 
 // mounts socket.io into our server
 var socketServer = io(server);
