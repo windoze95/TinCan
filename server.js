@@ -21,8 +21,9 @@ var express = require('express'), // our framework!
     io = require('socket.io'),
 
     app.settings.env = 'development'
-    var Config = require('./config'),
-    port = process.env.PORT || 8888 // server port
+    var Config = require('./config')
+    Config();
+    var port = process.env.PORT || 8888 // server port
     // conf = new Config, // access properties like such - conf.service.consumerKey
 
 mongoose.connect('mongodb://localhost/app', (error) => {
