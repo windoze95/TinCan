@@ -49,7 +49,7 @@ app.use(sessions) // mounting HTTPs session cookies
 // this middleware can redirect all traffic to HTTPs
 app.all('*', ( req, res, next ) => {
     console.log(req.protocol, req.headers['x-forwarded-proto']);
-    process.exit(0);
+    // process.exit(0);
     if( req.protocol === 'http' || !req.headers['x-forwarded-proto'] ) {
         res.set('X-Forwarded-Proto','https');
         res.redirect('https://'+ req.headers.host + req.url);
