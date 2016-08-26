@@ -9,8 +9,8 @@ module.exports = {
         //     });
         // }
 
-        var newTangle = new Tangle(req.body);
-
+        var newTangle = new Tangle;
+// (req.body)
         newTangle.save( (err, data) => {
             if(err) {
                 console.error('Things are not okay'.red, err);
