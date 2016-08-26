@@ -33,7 +33,12 @@
 
     <div class="jumbotron">
         <h1> ! </h1>
-        <h3>{{ tangleCtrl.cpos.timestamp }}</h3>
+
+        <p ng-repeat="coords in tangleCtrl.testcoords">
+            <h3>{{ coords.lat }}</h3>
+            {{ coords.lon }};
+        </p>
+
         <p>
             <a href="#" class="btn">entangle</a>
         </p>

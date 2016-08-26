@@ -79,23 +79,21 @@ HTTP.createServer( app ).listen( ports.http );
 // also create an HTTPs server
 var server = HTTPS.createServer( options, app).listen( ports.https );
 
-// var server = app.listen(port, () => {
+//mounts socket.io into our server
+var socketServer = io(server);
 
-// mounts socket.io into our server
-// var socketServer = io(server);
-//
-// // socketServer emits a connection event (the event when somebody new goes to your site)
-// socketServer.on('connection', (socket) => {
-//     // here, socket is the object representing the actual connection on someone using your site.
-//     // twitterStream.on('tweet', (tweetData) => {
-//     //     socket.emit('incomingTweet', tweetData); // private socket connection
-//     // });
-//
-//     socket.on('randomNumber', (data) => {
-//         console.log('Data:', data);
-//         var newNum = data * 100; // manipulating the random number we got from the client
-//
-//         socketServer.emit('newNumber', newNum); // public socket connection
-//         // broadcasting a newNumber to (ALL) clients connected via socket
-//     })
-// });
+// socketServer emits a connection event (the event when somebody new goes to your site)
+socketServer.on('connection', (socket) => {
+    // here, socket is the object representing the actual connection on someone using your site.
+    // twitterStream.on('tweet', (tweetData) => {
+    //     socket.emit('incomingTweet', tweetData); // private socket connection
+    // });
+
+    socket.on('coords', (data) => {
+        console.log('Data:', data);
+        var newNum = data * 100; // manipulating the random number we got from the client
+
+        socketServer.emit('newNumber', newNum); // public socket connection
+        // broadcasting a newNumber to (ALL) clients connected via socket
+    })
+});
