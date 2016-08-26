@@ -72,5 +72,5 @@ function tangleCtrl($scope) {
         // console.log(data, 'this is our socket running');
         //
         // socket.emit('coords', data);
-    });
+    // });
 };
