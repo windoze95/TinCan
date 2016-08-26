@@ -1,11 +1,11 @@
 var socket = io();
 
 angular.module('TinCan')
-    .controller('TanglesController', tangleCtrl)
+    .controller('TanglesController', ['$scope', '$window', tangleCtrl])
 
 // tangles.$inject = ['$scope', 'getLocation'];
 
-function tangleCtrl($scope) {
+function tangleCtrl($scope, $window) {
 // , getLocation
     var tCtrl = this;
 
