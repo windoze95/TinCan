@@ -29,4 +29,4 @@ function tinCanRouter($stateProvider, $urlRouterProvider) {
         })
 //
 //         $urlRouterProvider.otherwise('/')
-// }
+}
