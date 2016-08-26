@@ -1,11 +1,12 @@
 angular.module('TinCan', ['ui.router'])
 
 angular.module('TinCan')
-    .config(tinCanRouter)
+    .config(function ($stateProvider, $urlRouterProvider) {
+    // .config(tinCanRouter)
 
-tinCanRouter.$inject = ['$stateProvider, $urlRouterProvider'];
-
-function tinCanRouter($stateProvider, $urlRouterProvider) {
+// tinCanRouter.$inject = ['$stateProvider, $urlRouterProvider'];
+//
+// function tinCanRouter($stateProvider, $urlRouterProvider) {
     $stateProvider
 //         // .state('tangles', {
 //         //     url         : '/',
@@ -24,7 +25,7 @@ function tinCanRouter($stateProvider, $urlRouterProvider) {
 //         })
         .state('create', {
             url         : '/create',
-            templateUrl : 'create.html',
+            templateUrl : '/views/create.html',
             controller  : 'NewTangleController as ntCtrl'
         })
 //
