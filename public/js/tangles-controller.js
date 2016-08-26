@@ -27,12 +27,14 @@ function tangleCtrl($scope, getLocation) {
         console.log(tCtrl.coords.lon)
         console.log(tCtrl.coords)
 
-        return tCtrl.coords;
-        //\\//\\//\\// center map in map view, detect if in pin range
-    }).then( function(data){
-        console.log(data)
+        // return tCtrl.coords;
 
-        tCtrl.testcoords.push(data);
+        //\\//\\//\\// center map in map view, detect if in pin range
+    }).then( function(){
+        
+        console.log(tCtrl.coords)
+
+        tCtrl.testcoords.push(tCtrl.coords);
         // $scope.$apply();
         // console.log(data, 'this is our socket running');
         //
