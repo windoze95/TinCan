@@ -9,19 +9,22 @@ function tangleCtrl($scope, $window) {
 // , getLocation
     var tCtrl = this;
 
-    tCtrl.testcoords = [];
+    tCtrl.testcoords = {
+        lat: 0,
+        lon: 0
+    };
 
     socket.on('coords', function(data){
             console.log('? ', data)
             // chat.messageHistory.push(data)
-            $scope.$apply()
+            // $scope.$apply()
         })
 
     function geo_success(position) {
         tCtrl.lat = position.coords.latitude;
         tCtrl.lon = position.coords.longitude;
-        tCtrl.testcoords.push(tCtrl.lat);
-        tCtrl.testcoords.push(tCtrl.lon);
+        tCtrl.testcoords.lat = tCtrl.lat;
+        tCtrl.testcoords.lon = tCtrl.lon;
         socket.emit('coords', tCtrl.testcoords);
         //  $scope.$apply();
         // location_callback(userInfo);
