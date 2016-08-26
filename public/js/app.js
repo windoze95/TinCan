@@ -30,4 +30,4 @@ angular.module('TinCan')
         })
 //
 //         $urlRouterProvider.otherwise('/')
-}
+});
