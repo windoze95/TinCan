@@ -9,4 +9,4 @@ var tangle = mongoose.model('tangle', {
 
 });
 
-tangle.index({'location' : '2dsphere'})
+// tangle.index({'location' : '2dsphere'})
