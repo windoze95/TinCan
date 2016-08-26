@@ -11,12 +11,19 @@ function tangleCtrl($scope) {
 
     tCtrl.testcoords = [];
 
+    socket.on('coords', function(data){
+            console.log('? ', data)
+            // chat.messageHistory.push(data)
+            $scope.$apply()
+        })
+
     function geo_success(position) {
         tCtrl.lat = position.coords.latitude;
         tCtrl.lon = position.coords.longitude;
         tCtrl.testcoords.push(tCtrl.lat);
         tCtrl.testcoords.push(tCtrl.lon);
-         $scope.$apply();
+        socket.emit('coords', tCtrl.testcoords);
+        //  $scope.$apply();
         // location_callback(userInfo);
         // resendLocation();
     }
