@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var TangleSchema = mongoose.Schema({
+var tangle = mongoose.model('tangle'{
 
     title:      { type: String, required: true },
     location:   { type: Array },
@@ -9,4 +9,4 @@ var TangleSchema = mongoose.Schema({
 
 });
 
-TangleSchema.index({'location' : '2dsphere'})
+tangle.index({'location' : '2dsphere'})

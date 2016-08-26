@@ -1,5 +1,4 @@
-var Tangle = require('../models/tangles');
-var newTangle = new Tangle(req.body);
+var tangle = require('../models/tangles');
 
 module.exports = {
     create: (req, res) => {
@@ -10,6 +9,7 @@ module.exports = {
         //     });
         // }
 
+        var newTangle = new tangle(req.body);
 
         newTangle.save( (err, data) => {
             if(err) {
