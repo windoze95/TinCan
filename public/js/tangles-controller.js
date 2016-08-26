@@ -14,10 +14,10 @@ function tangleCtrl($scope, getLocation) {
     // tCtrl.currentP = getLocation;
 
     getLocation.then( function(data){
-        tCtrl.coords.lat = data.lat
-        tCtrl.coords.lon = data.lon
-        // tCtrl.coords.lat = getLocation.$$state.value.lat
-        // tCtrl.coords.lon = getLocation.$$state.value.lon
+        // tCtrl.coords.lat = data.lat
+        // tCtrl.coords.lon = data.lon
+        tCtrl.coords.lat = getLocation.$$state.value.lat
+        tCtrl.coords.lon = getLocation.$$state.value.lon
         // tCtrl.time = getLocation.$$state.value.time
         // tCtrl.cpos = data;
         // $scope.$apply()
