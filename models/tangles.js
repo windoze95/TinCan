@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var tangle = mongoose.model('tangle'{
+var tangle = mongoose.model('tangle', {
 
     title:      { type: String, required: true },
     location:   { type: Array },
