@@ -10,3 +10,5 @@ var tangle = mongoose.model('tangle', {
 });
 
 // tangle.index({'location' : '2dsphere'})
+
+module.exports = mongoose.model('User', UserSchema)
