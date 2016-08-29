@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var tangle = mongoose.model('tangle', {
+var TangleSchema = mongoose.model('tangle', {
 
     title:      { type: String, required: true },
     location:   { type: Array },
@@ -11,4 +11,4 @@ var tangle = mongoose.model('tangle', {
 
 // tangle.index({'location' : '2dsphere'})
 
-module.exports = mongoose.model('User', UserSchema)
+module.exports = mongoose.model('Tangle', TangleSchema)
