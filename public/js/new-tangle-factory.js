@@ -5,6 +5,7 @@ function createTangle($http) {
     return {
         create: function(tData) {
             return $http.post('/tangles/create', tData)
+            // socket.emit('newcoords', tData)
         }
     }
 }

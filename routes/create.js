@@ -9,39 +9,30 @@ module.exports = {
         //     });
         // }
 
+        // socket.on('coords', (data) => {
+        //     console.log('Data:', data);
+        //     // var data = {};
+        //     data.location = [data.lat, data.lon]
+
+
         var newTangle = new Tangle(req.body);
+        // req.body.location = [req.body.lat, req.body.lon]
 
         newTangle.save( (err, data) => {
+            // data.location = [data.lat, data.lon]
             if(err) {
-                console.error('Things are not okay'.red, err);
+                console.error('oh no'.red, err);
                 res.status(500).json({
                     message: 'could not be complete'
                 });
             } else {
-                console.info("Here is ze data:", data);
+                console.info('oh joy');
+                console.info(data);
+                console.info(data.lon);
+                console.info(data.location);
+                console.info(req.body)
                 res.json(data);
             }
         });
     }
 }
-    //,
-    // createFocus: () => {
-    //     var newCar = new Car({
-    //         // req.body should have a JSON payload that looks like this object
-    //         // in order for all the things to actually factually work.
-    //         make: 'Ford',
-    //         model: 'Focus ST',
-    //         year: 2014,
-    //         color: 'Silver',
-    //         hyperDrive: true,
-    //         features: ['bluetooth','keyless-entry','turbo','spare-tire']
-    //     });
-    //
-    //     newCar.save( (err, data) => {
-    //         if(err) {
-    //             console.error('Things are not okay'.red, error)
-    //         } else {
-    //             console.info("Here is ze data:", data);
-    //         }
-    //     });
-    // }

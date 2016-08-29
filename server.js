@@ -88,12 +88,30 @@ socketServer.on('connection', (socket) => {
     // twitterStream.on('tweet', (tweetData) => {
     //     socket.emit('incomingTweet', tweetData); // private socket connection
     // });
+    var Tangle = require('./models/tangles');
 
     socket.on('coords', (data) => {
         console.log('Data:', data);
-        var newNum = data * 100; // manipulating the random number we got from the client
+        // var data = {};
+        // data.location = [data.lat, data.lon]
+        // data.title = "newtitle"
 
-        socketServer.emit('newNumber', newNum); // public socket connection
+        var newTangle = new Tangle(data);
+
+        newTangle.save( (err, data) => {
+            if(err) {
+                console.error('oh no'.red, err);
+                // res.status(500).json({
+                    // message: 'could not be complete'
+                // });
+            } else {
+                console.info('oh joy');
+                // res.json(data);
+            }
+        });
+        // var newNum = data * 100; // manipulating the random number we got from the client
+
+        // socketServer.emit('newNumber', newNum); // public socket connection
         // broadcasting a newNumber to (ALL) clients connected via socket
     })
 });
