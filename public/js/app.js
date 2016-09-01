@@ -1,4 +1,4 @@
-angular.module('TinCan', ['ui.router'])
+angular.module('TinCan', ['ui.router', 'ngAnimate'])
 
 angular.module('TinCan')
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -8,16 +8,14 @@ angular.module('TinCan')
 //
 // function tinCanRouter($stateProvider, $urlRouterProvider) {
     $stateProvider
-//         // .state('tangles', {
-//         //     url         : '/',
-//         //     templateUrl : 'list.html',
-//         //     controller  : 'ListCtrl as lCtrl'
-//         // })
-//         .state('listView', {
-//             url         : '/list',
-//             templateUrl : 'list.html',
-//             controller  : 'ListCtrl as lCtrl'
-//         })
+        // .state('tangles', {
+        //     url         : '/',
+        //     templateUrl : '/views/list.html'
+        // })
+        .state('list', {
+            url         : '/list',
+            templateUrl : '/views/list.html'
+        })
 //         .state('mapView', {
 //             url         : '/map',
 //             templateUrl : 'list.html',
@@ -25,9 +23,13 @@ angular.module('TinCan')
 //         })
         .state('create', {
             url         : '/create',
-            templateUrl : '/views/create.html',
-            controller  : 'NewTangleController as ntCtrl'
+            templateUrl : '/views/create.html'
+        })
+        .state('chat', {
+            url         : '/chat',
+            templateUrl : '/views/chat.html'
+            // controller  : 'Shell as Shell'
         })
 //
-//         $urlRouterProvider.otherwise('/')
+        $urlRouterProvider.otherwise('/list')
 });

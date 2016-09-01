@@ -1,12 +1,14 @@
 var mongoose = require('mongoose'),
     TangleSchema = new mongoose.Schema({
-        title   : { type: String, required: true },
-        // location: [],
-        location: { type: Array },
-        date    : { type:Date, default:Date.now },
-        feed    : { type: String }
-    })
+        title    : { type: String, required: true },
+        loc : {
+            type: { type: String },
+            coordinates: []
+        },
+        // { type: "Point", coordinates: [ 40, 5 ] },
+        date     : { type: Date, default: Date.now },
+        feed     : { type: String }
+    });
 
-// tangle.index({'location' : '2dsphere'})
-
-module.exports = mongoose.model('Tangle', TangleSchema)
+TangleSchema.index({ loc: '2dsphere' });
+module.exports = mongoose.model('Tangle', TangleSchema);

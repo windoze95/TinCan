@@ -1,0 +1,59 @@
+<div class="chatPad chatTemp">
+    <div class="chatTemp">
+        <!-- <div class="chatTemp applyTrans"> -->
+            <div class="panel panel-primary chatTemp applyTrans">
+                <!-- <div class="panel-heading applyTrans"> -->
+                <!-- </div> -->
+                <div class="panel-body applyTrans">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <ul class="chat">
+                        <li ng-repeat="message in chat.messageHistory">
+                            <p>
+                                {{message.content}}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer applyTrans">
+                    <div class="input-group applyTrans">
+                        <input id="btn-input" class="form-control input-sm applyTrans" ng-keydown="chat.sendMessage($event)" ng-model="chat.chatMessage">
+                        <span class="input-group-btn applyTrans">
+                            <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        <!-- </div> -->
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div ng-controller="Shell as vm" class="chat-container">
+    <irontec-simple-chat
+            messages="vm.messages"
+            username="vm.username"
+            input-placeholder-text="You can write here"
+            submit-button-text="Send your message"
+            title="{{ data.title }}"
+            theme="material"
+            submit-function="vm.sendMessage"
+            visible="true">
+    </irontec-simple-chat>
+</div> -->

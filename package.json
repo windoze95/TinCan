@@ -10,6 +10,7 @@
   "author": "flashtwo",
   "license": "ISC",
   "dependencies": {
+    "angularjs-scroll-glue": "^2.0.7",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",
     "client-sessions": "^0.7.0",

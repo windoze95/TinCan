@@ -1,0 +1,5 @@
+<div id="tangles" class="row">
+    <div class="col-xs-12 col-md-12 tangleList" ng-repeat="data in tangleCtrl.tangleList">
+        <div ng-click="tangleCtrl.spawnChat(data._id)" ui-sref="chat">{{ data.title }}</div>
+    </div>
+</div>
