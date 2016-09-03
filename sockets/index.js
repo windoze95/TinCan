@@ -35,7 +35,7 @@ module.exports = function (socketServer) {
                                 ]
                             },
                             // $minDistance: 0,
-                            $maxDistance: 50
+                            $maxDistance: 100
                         }
                     }
                 },

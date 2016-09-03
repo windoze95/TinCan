@@ -4,7 +4,7 @@ form {
 
 #tabs {
     margin: 40px auto;
-    width: 480px;
+    max-width: 480px;
 }
 
 #tabs h1 {
@@ -12,7 +12,10 @@ form {
     padding: 20px;
 }
 
-.tab-content {border: 1px solid #ddd;border-top: none;}
+.tab-content {
+    border: 1px solid #ddd;
+    border-top: none;
+}
 
 .alert {
     margin: 20px 0;

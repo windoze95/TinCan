@@ -13,6 +13,7 @@ angular.module('TinCan')
         })
 
         socket.on('spawnChat2', function(id){
+            chat.messageHistory = []
             chat.currentId = id;
         });
 

@@ -28,7 +28,13 @@
         }
         auth.register = {
             submit: function($event) {
-                $http.post('/register', auth.payload).then(auth.register.success, auth.register.error)
+                if ( auth.payload.password === auth.payload.password2 ) {
+                    auth.payload.password2 = ""
+                    $http.post('/register', auth.payload).then(auth.register.success, auth.register.error)
+                    console.log(auth.payload)
+                } else {
+                    return auth.register.error('Passwords are not the same!');
+                }
             },
             success: function(res) {
                 location.href = '/tangles'

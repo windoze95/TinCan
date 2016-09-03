@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        
+
         <title>TinCan - Login</title>
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -32,10 +32,10 @@
                     <form ng-submit="auth.login.submit($event)">
                         <h1 class="text-center">Login!</h1>
                         <fieldset class="form-group">
-                            <label class="sr-only" for="email">Email</label>
+                            <label class="sr-only" for="Username">Username</label>
                             <div class="input-group">
-                                <div class="input-group-addon">@</div>
-                                <input required placeholder="Email" class="form-control" type="text" ng-model="auth.payload.email"/>
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                                <input required placeholder="Username" class="form-control" type="text" ng-model="auth.payload.Username"/>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
@@ -53,10 +53,10 @@
                     <form ng-submit="auth.register.submit($event)">
                         <h1 class="text-center">Register!</h1>
                         <fieldset class="form-group">
-                            <label class="sr-only" for="email">Email</label>
+                            <label class="sr-only" for="Username">Username</label>
                             <div class="input-group">
-                                <div class="input-group-addon">@</div>
-                                <input required placeholder="Email" class="form-control" type="text" ng-model="auth.payload.email"/>
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                                <input required placeholder="Username" class="form-control" type="text" ng-model="auth.payload.username"/>
                             </div>
                         </fieldset>
                         <fieldset class="form-group">
@@ -64,6 +64,7 @@
                             <div class="input-group">
                                 <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
                                 <input required placeholder="Create a password" class="form-control" type="password" ng-model="auth.payload.password"/>
+                                <input required placeholder="Re-enter your password" class="form-control" type="password" ng-model="auth.payload.password2"/>
                             </div>
                         </fieldset>
                         <button class="btn btn-primary" type="submit">Register</button>

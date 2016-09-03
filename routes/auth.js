@@ -23,7 +23,7 @@ module.exports = {
     },
     login: (req, res) => {
         User.findOne({
-            email: req.body.email // sent from the frontend in a POST request
+            username: req.body.username // sent from the frontend in a POST request
         }, (err, user) => {
             // If there was an error in mongo, send back a 500 response (general server error) to the Frontend
             if (err) {

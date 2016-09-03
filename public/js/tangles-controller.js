@@ -3,7 +3,7 @@ var socket = io();
 angular.module('TinCan')
     .controller('TanglesController', tangleCtrl)
 
-function tangleCtrl($scope) {
+function tangleCtrl($scope, $state) {
     var tangleCtrl = this;
 
     tangleCtrl.tangleList = [];
@@ -31,7 +31,11 @@ function tangleCtrl($scope) {
     socket.on('saveCoordinatesSuccess', function(data) {
         console.debug(data)
         // tangleCtrl.tangleList.push(data);
-        $scope.$apply();
+        $scope.$apply(function(){
+            $state.go('list');
+            
+        });
+
     });
 
     tangleCtrl.submitTangle = function() {
